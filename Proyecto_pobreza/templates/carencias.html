@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)https://www.chartjs.org/samples/latest/charts/bar/stacked.html -->
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Stacked Bar Chart</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script async="" src="static/Stacked Bar Chart_files/analytics.js.download"></script>
+    <script src="static/Stacked Bar Chart_files/Chart.min.js.download"></script>
+    <script src="static/Stacked Bar Chart_files/utils.js.download"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+    <style>
+        canvas {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+    </style>
+    <style type="text/css">
+        /* Chart.js */
+        
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: .99
+            }
+            to {
+                opacity: 1
+            }
+        }
+        
+        .chartjs-render-monitor {
+            animation: chartjs-render-animation 1ms
+        }
+        
+        .chartjs-size-monitor,
+        .chartjs-size-monitor-expand,
+        .chartjs-size-monitor-shrink {
+            position: absolute;
+            direction: ltr;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+            visibility: hidden;
+            z-index: -1
+        }
+        
+        .chartjs-size-monitor-expand>div {
+            position: absolute;
+            width: 1000000px;
+            height: 1000000px;
+            left: 0;
+            top: 0
+        }
+        
+        .chartjs-size-monitor-shrink>div {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            left: 0;
+            top: 0
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand mb-0 h1" href="home">Estudio de Pobreza en México</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="mapa">Mapa</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="carencias">Carencias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="indicadores">Indicadores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="fuentes" tabindex="-1" aria-disabled="true">Fuentes y Definiciones</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <main class="container-fluid">
+        <h2 style="color: rgb(66, 66, 66);">Análisis de Carencias por Estado</h2>
+        <p>Comparación de Carencias en términos porcentuales, en número de personas (miles) y Carencias promedio</p>
+        <h6>Seleccionar el año</h6>
+        <select id="selDataset" onchange="optionChanged(this.value)"></select>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-12">
+                <h4 style="color: rgb(66, 66, 66);">Porcentaje</h4>
+                <div style="width: 75%">
+                    <div class="chartjs-size-monitor">
+                        <div class="chartjs-size-monitor-expand">
+                            <div class=""></div>
+                        </div>
+                        <div class="chartjs-size-monitor-shrink">
+                            <div class=""></div>
+                        </div>
+                    </div>
+                    <canvas id="canvas" style="display: block; width: 947px; height: 473px;" width="947" height="533"></canvas>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-12">
+                <h4 style="color: rgb(66, 66, 66);">Cantidad (miles)</h4>
+                <div style="width: 75%">
+                    <div class="chartjs-size-monitor">
+                        <div class="chartjs-size-monitor-expand">
+                            <div class=""></div>
+                        </div>
+                        <div class="chartjs-size-monitor-shrink">
+                            <div class=""></div>
+                        </div>
+                    </div>
+                    <canvas id="canvaas" style="display: block; width: 947px; height: 473px;" width="947" height="533" class="chartjs-render-monitor"></canvas>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-12">
+                <h4 style="color: rgb(66, 66, 66);">Carencia Promedio</h4>
+                <div style="width: 75%">
+                    <div class="chartjs-size-monitor">
+                        <div class="chartjs-size-monitor-expand">
+                            <div class=""></div>
+                        </div>
+                        <div class="chartjs-size-monitor-shrink">
+                            <div class=""></div>
+                        </div>
+                    </div>
+                    <canvas id="canvaaas" style="display: block; width: 947px; height: 473px;" width="947" height="533" class="chartjs-render-monitor"></canvas>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+
+
+
+
+
+    </main>
+
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="static/js/chart.js"></script>
+
+
+
+</body>
+
+</html>

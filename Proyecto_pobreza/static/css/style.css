@@ -1,0 +1,19 @@
+.box {
+    height: 400px;
+    padding: 20px;
+    color: #fff;
+    background: deepskyblue;
+}
+
+.margin-top-80 {
+    margin-top: 80px;
+}
+
+.container2 {
+    background-image: url("https://www.caracteristicas.co/wp-content/uploads/2017/04/pobreza-en-mexico-3-e1566857287709.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.9;
+    font-family: Helvetica;
+}
